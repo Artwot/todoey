@@ -30,7 +30,14 @@ class _TasksScreenState extends State<TasksScreen> {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: const AddTaskScreen(),
+                child: AddTaskScreen(
+                  addTaskCallback: (String newTaskTitle) {
+                    setState(() {
+                      tasks.add(Task(name: newTaskTitle));
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           );
@@ -47,10 +54,10 @@ class _TasksScreenState extends State<TasksScreen> {
               right: 30.0,
               bottom: 30.0,
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30.0,
                   backgroundColor: Color(0xFFF2FAF7),
                   child: Icon(
@@ -58,7 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     size: 30.0,
                   ),
                 ),
-                Text(
+                const Text(
                   'Todoey',
                   style: TextStyle(
                     color: Color(0xFFF2FAF7),
@@ -67,8 +74,8 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '12 tasks',
-                  style: TextStyle(
+                  '${tasks.length} tasks',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w400,
